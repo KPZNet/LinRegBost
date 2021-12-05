@@ -14745,7 +14745,7 @@ PTRATIO does not seem to show that strong a correlation, but this is not surpris
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;seaborn.axisgrid.PairGrid at 0x14bb65c70&gt;</pre>
+<pre>&lt;seaborn.axisgrid.PairGrid at 0x25b08a92700&gt;</pre>
 </div>
 
 </div>
@@ -14864,16 +14864,12 @@ The PTRatio does not seem to have much change with log transformation.  We can t
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">X_train</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_test</span><span class="o">=</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
-<span class="n">scaler</span><span class="o">=</span><span class="n">StandardScaler</span><span class="p">()</span>
-<span class="n">X_train_scaled</span><span class="o">=</span><span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-<span class="n">X_test_scaled</span><span class="o">=</span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean Squared Error is &#39;</span><span class="p">,</span><span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span><span class="n">y_test</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Score is &#39;</span><span class="p">,</span><span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Score is &#39;</span><span class="p">,</span><span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
 </pre></div>
 
      </div>
@@ -14893,7 +14889,7 @@ The PTRatio does not seem to have much change with log transformation.  We can t
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Mean Squared Error is  68.54820143036389
+<pre>Mean Squared Error is  3.354000031287317
 Score is  0.7535315866632102
 </pre>
 </div>
@@ -14916,16 +14912,16 @@ Score is  0.7535315866632102
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">X_train</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_test</span><span class="o">=</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">Xlog</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
-<span class="n">scaler</span><span class="o">=</span><span class="n">StandardScaler</span><span class="p">()</span>
-<span class="n">X_train_scaled</span><span class="o">=</span><span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-<span class="n">X_test_scaled</span><span class="o">=</span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">predictor</span> <span class="o">=</span>  <span class="p">[</span><span class="mi">1000</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">pred</span><span class="p">]</span>
+<span class="n">actual</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">y_test</span><span class="p">[</span><span class="s1">&#39;PRICE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">predicted_houses</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Predicted&#39;</span><span class="p">:</span><span class="n">predictor</span><span class="p">,</span> <span class="s1">&#39;Actual&#39;</span><span class="p">:</span><span class="n">actual</span><span class="p">})</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean Squared Error is &#39;</span><span class="p">,</span><span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span><span class="n">y_test</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Score is &#39;</span><span class="p">,</span><span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Score is &#39;</span><span class="p">,</span><span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
 </pre></div>
 
      </div>
@@ -14945,8 +14941,8 @@ Score is  0.7535315866632102
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Mean Squared Error is  5.26949316905773
-Score is  0.8008880328535823
+<pre>Mean Squared Error is  3.228168610125105
+Score is  0.8008880328535825
 </pre>
 </div>
 </div>
@@ -14958,8 +14954,11 @@ Score is  0.8008880328535823
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="R-squared-and-MSE">R squared and MSE<a class="anchor-link" href="#R-squared-and-MSE">&#182;</a></h2><p>In our final Log model, we see a pretty good improvement.  We now have an R-squared of
-0.8 and our mean squared error is 5.25 - a significant improvement.</p>
+<h2 id="R-squared-and-MSE">R squared and MSE<a class="anchor-link" href="#R-squared-and-MSE">&#182;</a></h2><p>In our final Log model, we see a pretty good improvement from a score of 0.75.  We now have a score of
+0.8 and our mean squared error is 3.22.  This is a modest improvement of 5%.
+The MSE did not change much between the two runs.
+The MSE is based on original scaled (by 1000) price data - this is something to keep in mind.
+The differences between the two MSE is a bit larger</p>
 <h2 id="Residuals-Plot">Residuals Plot<a class="anchor-link" href="#Residuals-Plot">&#182;</a></h2><p>With our final model in mind, we want to look at the model's residuals.
 The residuals plot should look normally distributed with as few outliers as possible.
 In our residuals plot, they appear fairly normal, although there is a bit of an odd group of outliers
@@ -15026,9 +15025,116 @@ want to ignore that.  However, overall, the residuals look reasonably good.</p>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Predictions">Predictions<a class="anchor-link" href="#Predictions">&#182;</a></h2><p>The following are the predictions for housing prices based on model
+We print out the top 10 for brevity
+This gives a pretty good estimation, the difference between the true and actual from the test data is fairly close.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">predicted_houses</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Predicted</th>
+      <th>Actual</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>37748.126932</td>
+      <td>44800.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>18451.570678</td>
+      <td>17100.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>20728.490288</td>
+      <td>17800.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>33531.566720</td>
+      <td>33100.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>28042.500733</td>
+      <td>21900.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Summary">Summary<a class="anchor-link" href="#Summary">&#182;</a></h2><p>We get two scores, the first is 75% - which is OK, not the best, but OK.  Considering we are using only 3 of the original columns, it is not terrible.
 The second score is 80% using the log transformation.  This is pretty decent, again considering we retained just 3 columns.  Not a bad fit.</p>
-<p>The Mean Square Error is noticably smaller with the Log fit at 80% score.  The MSE went from 68 to 5 when we introduced the log transformation on the two LSTAT and PTRATIO features.</p>
+<p>The Mean Square Error is noticably smaller with the Log fit at 80% score.  The MSE went from 3350 to 3220 (unscaled) when we introduced the log transformation on the two LSTAT and PTRATIO features.</p>
 <p>Overall, our final model of:</p>
 
 </div>
@@ -15060,7 +15166,7 @@ The second score is 80% using the log transformation.  This is pretty decent, ag
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre> PRICE = -9.925847507987553 * LSTAT + -14.319113437977597 * PTRATIO + 3.087623881603365 * RM + 70.17724669394224
+<pre> PRICE = -9.925847507987566 * LSTAT + -14.319113437977608 * PTRATIO + 3.0876238816033688 * RM + 70.17724669394227
 </pre>
 </div>
 </div>
